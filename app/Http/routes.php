@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+
+Route::group(['middelware' => ['web']], function(){
+
+
+    Route::get('/', [
+    'uses' => 'niceController@getHome',
+     'as' => 'home'
+
+]);
+});
+
 
 Route::get('/{action}/{name?}', [
         'uses' => 'niceController@getNiceAction',
@@ -21,9 +29,9 @@ Route::get('/{action}/{name?}', [
     ]);
 
 
-Route::post('/', [
-    'uses' => 'niceController@postNiceAction',
-    'as' => 'benice'
+Route::post('/add_action', [
+    'uses' => 'niceController@postInsertNiceAction',
+    'as' => 'add_action'
 ]);
 
 /*Route::get('/greet/{name?}', function ($name = 'you') {
