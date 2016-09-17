@@ -22,6 +22,7 @@ class niceController extends Controller
         $actions_logged = NiceActionLog::all();
         $query = DB::table('nice_action_logs')
             ->join('nice_actions' , 'nice_action_logs.nice_action_id' , '=', 'nice_actions.id')
+            ->where('nice_actions.name' ,'=', 'kiss')
             ->get();
         return view('home', ['actions' => $actions , 'actions_logged' => $actions_logged, 'query' => $query]);
     }
